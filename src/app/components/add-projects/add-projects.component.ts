@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {IProject} from "../../models/IProject";
 import {AddProjects} from "../../store/projects/projects.actions";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngxs/store";
@@ -35,12 +34,21 @@ export class AddProjectsComponent implements OnInit {
 
     onSave() {
         try {
-            const projects: IProject[] = (JSON.parse(this.formGroup.value.json) as IJsonProjects).Projects;
-            this.formGroup.setErrors(null, {emitEvent: true});
-            this.store.dispatch(new AddProjects(projects));
+            const projects: any[] = (JSON.parse(this.formGroup.value.json) as IJsonProjects).Projects;
+            const allAreProjects = projects.every((project) => this.utilService.isAnProject(project));
+            if (allAreProjects) {
+                this.formGroup.setErrors(null, {emitEvent: true});
+                this.store.dispatch(new AddProjects(projects));
+            } else {
+                this.setError();
+            }
         } catch (e) {
-            this.getFormControl('json').setErrors({'json': true}, {emitEvent: true});
+            this.setError();
         }
+    }
+
+    setError() {
+        this.getFormControl('json').setErrors({'json': true}, {emitEvent: true});
     }
 
     getFormControl(formControlName: string): FormControl {
