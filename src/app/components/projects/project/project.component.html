@@ -1,0 +1,95 @@
+<div class="project-wrapper">
+    <mat-card class="project-card" [appearance]="'outlined'">
+        <mat-card-content class="content">
+            <form [formGroup]="formGroup" class="form">
+                <mat-form-field class="form-control full-width">
+                    <mat-label>Название</mat-label>
+                    <input matInput [formControl]="getFormControl('subject')"
+                           placeholder="Название проекта"
+                           [errorStateMatcher]="matcher"
+                    >
+                    <mat-error *ngIf="getFormControl('subject').hasError('required')">
+                        Введите название проекта
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-control full-width">
+                    <mat-label>Описание</mat-label>
+                    <input matInput [formControl]="getFormControl('description')"
+                           placeholder="Описание проекта"
+                           [errorStateMatcher]="matcher"
+                    >
+                    <mat-error *ngIf="getFormControl('description').hasError('required')">
+                        Введите описание проекта
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-control full-width">
+                    <mat-label>Автор</mat-label>
+                    <input matInput [formControl]="getFormControl('createdBy')"
+                           placeholder="Автор"
+                           [errorStateMatcher]="matcher"
+                    >
+                    <mat-error *ngIf="getFormControl('createdBy').hasError('required')">
+                        Введите автора
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-control full-width">
+                    <mat-label>Стоимость</mat-label>
+                    <input matInput [formControl]="getFormControl('cost')"
+                           placeholder="Стоимость"
+                           [errorStateMatcher]="matcher"
+                    >
+                    <mat-error *ngIf="getFormControl('cost').hasError('required')">
+                        Введите стоимость
+                    </mat-error>
+                    <mat-error *ngIf="getFormControl('cost').hasError('pattern')">
+                        Введите число
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-control full-width">
+                    <mat-label>Дата начала</mat-label>
+                    <input
+                        matInput
+                        [matDatepicker]="startDatePicker"
+                        class="form-field-input"
+                        [formControl]="getFormControl('startDate')"
+                        [errorStateMatcher]="matcher"
+                        [max]="getFormControl('endDate').value"
+                    >
+                    <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startDatePicker></mat-datepicker>
+                    <mat-error *ngIf="getFormControl('startDate').hasError('required')">
+                        Введите дату начала
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-control full-width">
+                    <mat-label>Дата окончания</mat-label>
+                    <input
+                        matInput
+                        [matDatepicker]="endDatePicker"
+                        class="form-field-input"
+                        [formControl]="getFormControl('endDate')"
+                        [errorStateMatcher]="matcher"
+                        [min]="getFormControl('startDate').value"
+                    >
+                    <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endDatePicker></mat-datepicker>
+                    <mat-error *ngIf="getFormControl('endDate').hasError('required')">
+                        Введите дату окончания
+                    </mat-error>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <div class="spacer"></div>
+        <mat-card-actions class="actions">
+<!--        <div class="actions">-->
+            <button mat-flat-button color="primary" (click)="onSave()" [disabled]="formGroup.invalid">Изменить</button>
+<!--        </div>-->
+        </mat-card-actions>
+    </mat-card>
+
+</div>

@@ -1,0 +1,35 @@
+:host {
+    max-width: 400px;
+}
+
+.list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 400px;
+    overflow-y: auto;
+    max-height: 100%;
+
+    .project-card {
+        max-width: 400px;
+        cursor: pointer;
+        background-color: #f8f8f8;
+
+        &:hover {
+            background-color: #f5a17355;
+        }
+
+        &.selected {
+            background-color: #f5a17395;
+        }
+
+        .footer {
+            padding: 0 16px 16px 0;
+
+            .subject {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+}
