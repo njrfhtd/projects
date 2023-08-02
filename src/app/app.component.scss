@@ -1,0 +1,10 @@
+.content-wrapper {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    flex-direction: column;
+
+    .mat-mdc-tab-links {
+        justify-content: center;
+    }
+}

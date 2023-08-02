@@ -1,0 +1,23 @@
+<div class="add-projects-wrapper" *ngIf="!!formGroup">
+    <form class="form" [formGroup]="formGroup">
+        <mat-form-field class="full-width">
+            <mat-label>Введите JSON</mat-label>
+            <textarea matInput placeholder="Введите JSON"
+                      cdkTextareaAutosize
+                      cdkAutosizeMinRows="18"
+                      cdkAutosizeMaxRows="30"
+                      [formControl]="getFormControl('json')"
+                      [errorStateMatcher]="matcher"
+            ></textarea>
+            <mat-error *ngIf="getFormControl('json').hasError('required')">
+                Введите JSON
+            </mat-error>
+            <mat-error *ngIf="getFormControl('json').hasError('json')">
+                Введите валидный JSON
+            </mat-error>
+        </mat-form-field>
+    </form>
+    <div class="actions">
+        <button class="save" mat-flat-button color="primary" (click)="onSave()" [disabled]="formGroup.invalid">Сохранить</button>
+    </div>
+</div>
