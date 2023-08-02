@@ -147,5 +147,6 @@ export class ProjectsState {
             projects: updatedProjects,
             selectedProject: payload,
         });
+        dispatch(new ClearSelectedProject());
     }
 }

@@ -50,6 +50,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
         this.store.dispatch(new SetProject(project));
     }
 
+    onClose() {
+        this.store.dispatch(new ClearSelectedProject());
+    }
+
     createForm() {
         this.formGroup = this.fb.group({
             id: new FormControl(this.project.id, [Validators.required]),

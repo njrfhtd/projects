@@ -26,7 +26,12 @@
         .actions {
             padding: 16px;
             display: flex;
+            gap: 16px;
             justify-content: center;
+
+            .close {
+                background-color: #888888;
+            }
         }
     }
 }
