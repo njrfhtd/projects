@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Select, Store} from "@ngxs/store";
 import {ClearSelectedProject, SetProject} from "../../../store/projects/projects.actions";
-import {Observable, Subscription} from "rxjs";
+import {filter, Observable, Subscription} from "rxjs";
 import {ProjectsState} from "../../../store/projects/projects.state";
 import {IProject} from "../../../models/IProject";
 import {
@@ -34,7 +34,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.subscriptions.add(this.project$.subscribe((project) => {
+        this.subscriptions.add(this.project$
+            .pipe(filter((value) => value !== null))
+            .subscribe((project) => {
             this.project = project;
             this.createForm();
         }));
